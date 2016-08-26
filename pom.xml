@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2016: Thomson Reuters Global Resources. All Rights Reserved.
+  ~
+  ~ Proprietary and Confidential information of TRGR. Disclosure, Use or
+  ~ Reproduction without the written authorization of TRGR is prohibited.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>trgr.rd.mavem</groupId>
+        <artifactId>rd-super-pom</artifactId>
+        <version>1</version>
+    </parent>
+    
+    <groupId>trgr.rd.dotcounter</groupId>
+    <artifactId>dot-counter</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    
+    <scm>
+        <url>https://git.sami.int.thomsonreuters.com/RD/dot-counter</url>
+        <connection>scm:git:ssh://git@git.sami.int.thomsonreuters.com/RD/dot-counter.git</connection>
+    </scm>
+
+    <!--<ciManagement>
+        <system>jenkins</system>
+        <url>http://rdbuild.int.westgroup.com:8080/job/SET_ME_JENKINS_JOB_NAME</url>
+    </ciManagement>-->
+
+    <!--<issueManagement>
+        <system>jira</system>
+        <url>http://jira.bjz.apac.ime.reuters.com/browse/SET_ME_JIRA_KEY</url>
+    </issueManagement>-->
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <dependencies>
+        <!-- === Lang / Commons / Util === -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.3</version>
+        </dependency>
+        <!-- End commons / lang / util -->
+
+        <!-- === Logging === -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        <!-- groovy is needed by logback due to some configuration classes being used-->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+        </dependency>
+        <!-- janino is needed by logback in order to support conditionals in the logback configuration files -->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+        </dependency>
+        <!-- get empty placeholder jar instead of commons-logging since we want to use jcl-over-slf4j  -->
+        <!-- See http://day-to-day-stuff.blogspot.com/2007/10/announcement-version-99-does-not-exist.html for information -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>uk.org.lidalia</groupId>
+            <artifactId>sysout-over-slf4j</artifactId>
+        </dependency>
+        <!-- End Logging Dependencies -->
+    </dependencies>
+</project>
