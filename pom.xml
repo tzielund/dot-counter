@@ -18,7 +18,7 @@
     <groupId>trgr.rd.dotcounter</groupId>
     <artifactId>dot-counter</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.1.0-SNAPSHOT</version>
     
     <scm>
         <url>https://git.sami.int.thomsonreuters.com/RD/dot-counter</url>
