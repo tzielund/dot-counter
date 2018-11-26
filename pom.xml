@@ -1,125 +1,305 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2016: Thomson Reuters Global Resources. All Rights Reserved.
+  ~ Copyright 2016-2018: Thomson Reuters Global Resources. All Rights Reserved.
   ~
   ~ Proprietary and Confidential information of TRGR. Disclosure, Use or
   ~ Reproduction without the written authorization of TRGR is prohibited.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
-        <groupId>trgr.rd.maven</groupId>
+        <groupId>com.tr.rd.maven</groupId>
         <artifactId>rd-super-pom</artifactId>
-        <version>1</version>
+        <version>71</version>
     </parent>
-    
-    <groupId>trgr.rd.dotcounter</groupId>
+
+    <groupId>com.tr.rd.dotcounter</groupId>
     <artifactId>dot-counter</artifactId>
-    <packaging>jar</packaging>
-    <version>1.1.0-SNAPSHOT</version>
-    
+    <version>1.2.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>dot-counter</name>
+
+    <description> Simple utility component to help tell how far a process has gone. Dots will be printed to System.out. </description>
+
+    <organization>
+        <name>Research &amp; Development</name>
+        <url>https://thehub.thomsonreuters.com/groups/research-development</url>
+    </organization>
+
     <scm>
-        <url>https://git.sami.int.thomsonreuters.com/RD/dot-counter</url>
-        <connection>scm:git:ssh://git@git.sami.int.thomsonreuters.com/RD/dot-counter.git</connection>
+        <url>https://git.sami.int.thomsonreuters.com/rd/dot-counter</url>
+        <connection>scm:git:git@git.sami.int.thomsonreuters.com:rd/dot-counter.git</connection>
+        <developerConnection>scm:git:git@git.sami.int.thomsonreuters.com:rd/dot-counter.git</developerConnection>
+        <tag>head</tag>
     </scm>
 
-    <!--<ciManagement>
+    <!-- No continuous integration
+    <ciManagement>
         <system>jenkins</system>
-        <url>http://rdbuild.int.westgroup.com:8080/job/SET_ME_JENKINS_JOB_NAME</url>
-    </ciManagement>-->
+        <url>http://rdbuild.int.thomsonreuters.com</url>
+    </ciManagement>
+    -->
 
-    <!--<issueManagement>
+    <!-- No issue management
+    <issueManagement>
         <system>jira</system>
-        <url>http://jira.bjz.apac.ime.reuters.com/browse/SET_ME_JIRA_KEY</url>
-    </issueManagement>-->
-    
+        <url>http://ent.jira.int.thomsonreuters.com</url>
+    </issueManagement>
+    -->
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <site.context.name>dotcounter</site.context.name>
+    </properties>
+
+    <modules>
+
+    </modules>
+
+    <distributionManagement>
+        <!--
+            Repository ID's are set to match the corporate standard IDs used across the enterprise, including the corporate "TR Jenkins" installation.
+            These IDs also match those used in settings.xml files, to specify credentials, on developer/researcher desktops/laptops and CI/CD systems.
+            As such, they should not be changed. Repository names are set to more "user friendly" descriptions of the repo and its purpose.
+            Reference: https://thehub.thomsonreuters.com/docs/DOC-2714036#jive_content_id_Upload_process
+        -->
+        <repository>
+            <!-- Default BAMS repository for uploading release artifacts. Commonly known as 'libs-release-local'. -->
+            <id>bams-aws-release-maven-cloud</id>
+            <name>BAMS Releases Distribution Repository</name>
+            <url>https://bams-aws.refinitiv.com/artifactory/release.maven.cloud</url>
+        </repository>
+        <snapshotRepository>
+            <!-- Default BAMS repository for uploading snapshot artifacts. Commonly known as 'libs-snapshot-local'. -->
+            <id>bams-aws-snapshot-maven-cloud</id>
+            <name>BAMS Snapshots Distribution Repository</name>
+            <url>https://bams-aws.refinitiv.com/artifactory/snapshot.maven.cloud</url>
+        </snapshotRepository>
+        <site>
+            <id>rd-sites</id>
+            <name>R&amp;D Maven Sites Server</name>
+            <url>dav:http://rdsites.int.thomsonreuters.com/projects/${site.context.name}/${project.version}</url>
+        </site>
+    </distributionManagement>
+    <repositories>
+        <!--
+            Repository ID's are set to match the corporate standard IDs used across the enterprise, including the corporate "TR Jenkins" installation.
+            These IDs also match those used in settings.xml files, to specify credentials, on developer/researcher desktops/laptops and CI/CD systems.
+            As such, they should not be changed. Repository names are set to more "user friendly" descriptions of the repo and its purpose.
+            Reference: https://thehub.thomsonreuters.com/docs/DOC-2714036#jive_content_id_Upload_process
+        -->
+        <repository>
+            <id>bams-aws-public-maven-global</id>
+            <name>BAMS Public Repository Mirror</name>
+            <url>https://bams-aws.refinitiv.com/artifactory/public.maven.global</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>bams-aws-release-maven-global</id>
+            <name>BAMS Releases Download Repository</name>
+            <url>https://bams-aws.refinitiv.com/artifactory/release.maven.global</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>bams-aws-snapshot-maven-global</id>
+            <name>BAMS Snapshots Download Repository</name>
+            <url>https://bams-aws.refinitiv.com/artifactory/snapshot.maven.global</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <!--
+            Repository ID's are set to match the corporate standard IDs used across the enterprise, including the corporate "TR Jenkins" installation.
+            These IDs also match those used in settings.xml files, to specify credentials, on developer/researcher desktops/laptops and CI/CD systems.
+            As such, they should not be changed. Repository names are set to more "user friendly" descriptions of the repo and its purpose.
+            Reference: https://thehub.thomsonreuters.com/docs/DOC-2714036#jive_content_id_Upload_process
+        -->
+        <pluginRepository>
+            <!-- Default BAMS repository for downloading maven plugin releases. Commonly known as 'plugins-release-global'. -->
+            <id>bams-aws-plugins-release-maven-global</id>
+            <name>BAMS Maven Plugins Releases Download Repository</name>
+            <url>https://bams-aws.refinitiv.com/artifactory/plugins-release.maven.global</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <!-- Default BAMS repository for downloading maven plugin snapshots. Commonly known as 'plugins-snapshot-global'. -->
+            <id>bams-aws-plugins-snapshot-maven-global</id>
+            <name>BAMS Maven Plugins Snapshots Download Repository</name>
+            <url>https://bams-aws.refinitiv.com/artifactory/plugins-snapshot.maven.global</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
+        <pluginManagement>
+            <plugins>
+
+            </plugins>
+        </pluginManagement>
+
         <plugins>
+            <!-- Most build plugin configuration is done in the <pluginManagement> section, including  <pluginManagement> in super POM -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
-    
-    <dependencies>
-        <!-- === Lang / Commons / Util === -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-net</groupId>
-            <artifactId>commons-net</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.9.3</version>
-        </dependency>
-        <!-- End commons / lang / util -->
 
-        <!-- === Logging === -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-        </dependency>
-        <!-- groovy is needed by logback due to some configuration classes being used-->
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-        </dependency>
-        <!-- janino is needed by logback in order to support conditionals in the logback configuration files -->
-        <dependency>
-            <groupId>org.codehaus.janino</groupId>
-            <artifactId>janino</artifactId>
-        </dependency>
-        <!-- get empty placeholder jar instead of commons-logging since we want to use jcl-over-slf4j  -->
-        <!-- See http://day-to-day-stuff.blogspot.com/2007/10/announcement-version-99-does-not-exist.html for information -->
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>uk.org.lidalia</groupId>
-            <artifactId>sysout-over-slf4j</artifactId>
-        </dependency>
-        <!-- End Logging Dependencies -->
+    <dependencyManagement>
+
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- ** ALL DEPENDENCIES SHOULD BE DECLARED THE <dependencyManagement> SECTION OF THIS POM, OR THE PARENT/SUPER POM ** -->
+        <!-- Please keep dependencies organized by grouping them based on common functionality -->
+
     </dependencies>
+
+    <profiles>
+        <!-- region === BAMS PROFILES === -->
+        <profile>
+            <!--
+                Profile for BAMS access from any datacenter network, or other system, that can access AWS across Direct Connect (or any other source that can use direct connect)
+                These URLs default in the <properties> section to the URL's used for access from networks that cannot use direct connect such as from developer's PCs
+                See https://thehub.thomsonreuters.com/docs/DOC-2635905#jive_content_id_What_are_the_BAMS_AWS_URLs
+            -->
+            <id>bams-direct-connect</id>
+            <distributionManagement>
+                <!--
+                    Repository ID's are set to match the corporate standard IDs used across the enterprise, including the corporate "TR Jenkins" installation.
+                    These IDs also match those used in settings.xml files, to specify credentials, on developer/researcher desktops/laptops and CI/CD systems.
+                    As such, they should not be changed. Repository names are set to more "user friendly" descriptions of the repo and its purpose.
+                    Reference: https://thehub.thomsonreuters.com/docs/DOC-2714036#jive_content_id_Upload_process
+                -->
+                <repository>
+                    <!-- Default BAMS repository for uploading release artifacts. Commonly known as 'libs-release-local'. -->
+                    <id>bams-aws-release-maven-cloud</id>
+                    <name>BAMS Releases Distribution Repository</name>
+                    <url>https://bams-aws.int.thomsonreuters.com/artifactory/release.maven.cloud</url>
+                </repository>
+                <snapshotRepository>
+                    <!-- Default BAMS repository for uploading snapshot artifacts. Commonly known as 'libs-snapshot-local'. -->
+                    <id>bams-aws-snapshot-maven-cloud</id>
+                    <name>BAMS Snapshots Distribution Repository</name>
+                    <url>https://bams-aws.int.thomsonreuters.com/artifactory/snapshot.maven.cloud</url>
+                </snapshotRepository>
+                <site>
+                    <id>rd-sites</id>
+                    <name>R&amp;D Maven Sites Server</name>
+                    <url>dav:http://rdsites.int.thomsonreuters.com/projects/${site.context.name}/${project.version}</url>
+                </site>
+            </distributionManagement>
+            <repositories>
+                <!--
+                    Repository ID's are set to match the corporate standard IDs used across the enterprise, including the corporate "TR Jenkins" installation.
+                    These IDs also match those used in settings.xml files, to specify credentials, on developer/researcher desktops/laptops and CI/CD systems.
+                    As such, they should not be changed. Repository names are set to more "user friendly" descriptions of the repo and its purpose.
+                    Reference: https://thehub.thomsonreuters.com/docs/DOC-2714036#jive_content_id_Upload_process
+                -->
+                <repository>
+                    <id>bams-aws-public-maven-global</id>
+                    <name>BAMS Public Repository Mirror</name>
+                    <url>https://bams-aws.int.thomsonreuters.com/artifactory/public.maven.global</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>bams-aws-release-maven-global</id>
+                    <name>BAMS Releases Download Repository</name>
+                    <url>https://bams-aws.int.thomsonreuters.com/artifactory/release.maven.global</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>bams-aws-snapshot-maven-global</id>
+                    <name>BAMS Snapshots Download Repository</name>
+                    <url>https://bams-aws.int.thomsonreuters.com/artifactory/snapshot.maven.global</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <!--
+                    Repository ID's are set to match the corporate standard IDs used across the enterprise, including the corporate "TR Jenkins" installation.
+                    These IDs also match those used in settings.xml files, to specify credentials, on developer/researcher desktops/laptops and CI/CD systems.
+                    As such, they should not be changed. Repository names are set to more "user friendly" descriptions of the repo and its purpose.
+                    Reference: https://thehub.thomsonreuters.com/docs/DOC-2714036#jive_content_id_Upload_process
+                -->
+                <pluginRepository>
+                    <!-- Default BAMS repository for downloading maven plugin releases. Commonly known as 'plugins-release-global'. -->
+                    <id>bams-aws-plugins-release-maven-global</id>
+                    <name>BAMS Maven Plugins Releases Download Repository</name>
+                    <url>https://bams-aws.int.thomsonreuters.com/artifactory/plugins-release.maven.global</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                    <!-- Default BAMS repository for downloading maven plugin snapshots. Commonly known as 'plugins-snapshot-global'. -->
+                    <id>bams-aws-plugins-snapshot-maven-global</id>
+                    <name>BAMS Maven Plugins Snapshots Download Repository</name>
+                    <url>https://bams-aws.int.thomsonreuters.com/artifactory/plugins-snapshot.maven.global</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <!-- endregion BAMS profiles -->
+    </profiles>
 </project>
